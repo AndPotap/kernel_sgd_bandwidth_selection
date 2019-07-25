@@ -53,5 +53,6 @@ plt.plot(x_grid, y_hat.numpy(), c='blue', label='prediction')
 plt.plot(x_grid, y_bad.numpy(), c='gray', label='neutral')
 plt.plot(x_grid, np.sin(x_grid), c='red', label='actual')
 plt.legend()
+plt.savefig(fname='./Paper/pics/example01.png')
 plt.show()
 # ===========================================================================
