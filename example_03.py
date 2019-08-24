@@ -30,7 +30,7 @@ y = y_true + noise
 train_ind, test_ind = get_train_test_ind(obs_n=obs_n, folds_n=folds_n, train_split=0.8)
 chi, loss, gradient = perform_sgd(x=x, y=y, train_ind=train_ind, test_ind=test_ind, print_every=1,
                                   folds_n=folds_n, multiple_regularizers=False, distributed=True,
-                                  learning_rate=0.1, max_iters=20, tolerance=1.e-4,
+                                  learning_rate=0.1, max_iters=100, tolerance=1.e-4,
                                   batch_pct=1)
 bandwidth = tf.math.exp(chi)
 # ===========================================================================
