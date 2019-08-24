@@ -18,7 +18,11 @@ obs_n = 1000
 folds_n = 8
 x = np.reshape(np.linspace(start=0, stop=1, num=obs_n), newshape=(obs_n, 1))
 noise = np.random.normal(loc=0, scale=0.1, size=obs_n)
-doppler = lambda arg_x: np.reshape(a=np.sqrt(arg_x*(1-arg_x))*np.sin(2.1*np.pi/(arg_x + 0.05)), newshape=obs_n)
+
+
+def doppler(arg_x): return np.reshape(a=np.sqrt(arg_x*(1-arg_x))*np.sin(2.1*np.pi/(arg_x + 0.05)), newshape=obs_n)
+
+
 y_true = doppler(x)
 y = y_true + noise
 # ===========================================================================

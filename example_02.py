@@ -66,5 +66,6 @@ plt.scatter(x=x[:, 1], y=y, c='orange', label='data')
 plt.plot(x_grid, y_hat.numpy(), c='blue', label='multiple bandwidths')
 plt.plot(x_grid, y_bad.numpy(), c='gray', label='single bandwidth')
 plt.legend()
+plt.savefig(fname='./Paper/pics/example02.png')
 plt.show()
 # ===========================================================================
