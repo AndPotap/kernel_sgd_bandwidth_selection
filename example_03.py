@@ -8,6 +8,7 @@ from matplotlib import pyplot as plt
 from Models.kernel_sgd import perform_sgd
 from Models.kernel_funcs import get_all_kernel_predictions
 from Utils.train_test import get_train_test_ind
+from Utils.example_funcs import compute_doppler
 # ===========================================================================
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # ===========================================================================
@@ -19,11 +20,7 @@ folds_n = 8
 x = np.reshape(np.linspace(start=0, stop=1, num=obs_n), newshape=(obs_n, 1))
 noise = np.random.normal(loc=0, scale=0.1, size=obs_n)
 
-
-def doppler(arg_x): return np.reshape(a=np.sqrt(arg_x*(1-arg_x))*np.sin(2.1*np.pi/(arg_x + 0.05)), newshape=obs_n)
-
-
-y_true = doppler(x)
+y_true = compute_doppler(x, obs_n=obs_n)
 y = y_true + noise
 # ===========================================================================
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -33,7 +30,7 @@ y = y_true + noise
 train_ind, test_ind = get_train_test_ind(obs_n=obs_n, folds_n=folds_n, train_split=0.8)
 chi, loss, gradient = perform_sgd(x=x, y=y, train_ind=train_ind, test_ind=test_ind, print_every=1,
                                   folds_n=folds_n, multiple_regularizers=False, distributed=True,
-                                  learning_rate=0.1, max_iters=20, tolerance=1.e-4,
+                                  learning_rate=0.1, max_iters=100, tolerance=1.e-4,
                                   batch_pct=1)
 bandwidth = tf.math.exp(chi)
 # ===========================================================================
